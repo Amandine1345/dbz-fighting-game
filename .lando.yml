@@ -1,0 +1,21 @@
+name: dbz-fighting-game
+
+proxy:
+  appserver:
+    - dbz-fighting-game.lndo.site:8080
+
+services:
+  appserver:
+    type: node:18
+    scanner: false
+    ssl: false
+    build:
+      - yarn install
+    command: yarn dev
+    overrides:
+      ports:
+        - 8080:8080
+
+tooling:
+  yarn:
+    service: appserver
