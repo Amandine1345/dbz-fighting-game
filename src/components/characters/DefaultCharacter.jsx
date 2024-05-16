@@ -16,7 +16,10 @@ const defaultCharacter = (WrappedComponent, power) => {
         componentDidUpdate(prevProps, prevState, snapshot) {
             if (this.state !== prevState) {
                 const ComponentName = WrappedComponent.name;
-                this.props.reduceHandler(ComponentName, power);
+
+                if (this.state.hits > prevState.hits) {
+                    this.props.reduceHandler(ComponentName, power);
+                }
             }
         }
 
