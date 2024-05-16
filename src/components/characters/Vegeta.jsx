@@ -1,25 +1,17 @@
 import { Component } from "react";
+import DefaultCharacter from "./DefaultCharacter.jsx";
 import vegetaPicture from '../../assets/media/vegeta.png';
 
 class Vegeta extends Component {
-    state = {
-        hits: 0,
-    }
-
-    addOneHit = () => {
-        this.setState(prevState => {
-            return {
-                hits: prevState.hits + 1,
-            }
-        });
-    }
-
     render() {
+
+        const {hocState, hocAddOneHit} = this.props;
+
         return (
             <div className="col">
                 <img src={vegetaPicture} alt="Vegeta" height="450px"/>
                 <br/>
-                <button onClick={this.addOneHit} className="btn btn-success">Hit</button>
+                <button onClick={hocAddOneHit} className="btn btn-success">Hit</button>
 
                 <table className="table table-striped mt-3">
                     <thead>
@@ -29,7 +21,7 @@ class Vegeta extends Component {
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{this.state.hits}</td>
+                        <td>{hocState.hits}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -38,4 +30,4 @@ class Vegeta extends Component {
     }
 }
 
-export default Vegeta;
+export default DefaultCharacter(Vegeta);
