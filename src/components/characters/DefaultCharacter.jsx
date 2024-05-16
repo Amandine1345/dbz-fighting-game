@@ -1,6 +1,6 @@
-import { Component } from "react";
+import {Component} from "react";
 
-const defaultCharacter = (WrappedComponent) => {
+const defaultCharacter = (WrappedComponent, power) => {
 
     class DefaultCharacter extends Component {
         state = {
@@ -8,15 +8,20 @@ const defaultCharacter = (WrappedComponent) => {
         }
 
         addOneHit = () => {
-            this.setState(prevState => {
-                return {
-                    hits: prevState.hits + 1,
-                }
-            });
+            this.setState(prevState => ({
+                hits: prevState.hits + 1,
+            }));
+        }
+
+        componentDidUpdate(prevProps, prevState, snapshot) {
+            if (this.state !== prevState) {
+                const ComponentName = WrappedComponent.name;
+                this.props.reduceHandler(ComponentName, power);
+            }
         }
 
         render() {
-            return <WrappedComponent hocState={this.state} hocAddOneHit={this.addOneHit}/>
+            return <WrappedComponent hocState={this.state} hocAddOneHit={this.addOneHit} {...this.props} />
         }
     }
 

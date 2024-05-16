@@ -5,23 +5,29 @@ import gokuPicture from '../../assets/media/goku.png';
 class Goku extends Component {
     render() {
 
-        const {hocState, hocAddOneHit} = this.props;
+        const {hocState, hocAddOneHit, life} = this.props;
+
+        const lifeDisplay = life > 0 ? `${life} %` : 'Dead';
+        const buttonTextDisplay = life > 0 ? 'Hit' : 'Dead';
+        const buttonStyleDisplay = life > 0 ? 'btn-success' : 'btn-danger disabled';
 
         return (
             <div className="col">
                 <img src={gokuPicture} alt="Goku" height="450px"/>
                 <br/>
-                <button onClick={hocAddOneHit} className="btn btn-success">Hit</button>
+                <button onClick={hocAddOneHit} className={`btn ${buttonStyleDisplay}`}>{buttonTextDisplay}</button>
 
                 <table className="table table-striped mt-3">
                     <thead>
                     <tr>
                         <th scope="col">Hits</th>
+                        <th scope="col">Life</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>{hocState.hits}</td>
+                        <td>{lifeDisplay}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -30,4 +36,4 @@ class Goku extends Component {
     }
 }
 
-export default DefaultCharacter(Goku);
+export default DefaultCharacter(Goku, 20);
