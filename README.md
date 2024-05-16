@@ -2,6 +2,8 @@
 
 It's the first application to [learn ReactJS](https://www.udemy.com/course/formation-react-js-pour-tous/) 
 
+![Dragon Ball Z Fighting Game](public/readme.png)
+
 ## Prerequisites
 
 You need to install [Lando](https://docs.lando.dev/install/linux.html) in your computer.
