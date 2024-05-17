@@ -1,5 +1,5 @@
 // Libraries
-import {Fragment, useEffect, useRef, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 
 // Custom Components
 import Goku from "./components/characters/Goku.jsx";
@@ -16,8 +16,8 @@ function App() {
     const [vegetaLifeState, setVegetaLife] = useState(100);
 
     // References
-    const gokuRef = useRef();
-    const vegetaRef = useRef();
+    // const gokuRef = useRef(null);
+    // const vegetaRef = useRef();
 
     // Cycle
     useEffect(() => {
@@ -49,8 +49,8 @@ function App() {
                 <h1>Goku vs. Vegeta</h1>
                 <hr/>
                 <div className="row">
-                    <Vegeta ref={vegetaRef} life={vegetaLifeState} reduceHandler={reduceLife}/>
-                    <Goku ref={gokuRef} life={gokuLifeState} reduceHandler={reduceLife}/>
+                    <Vegeta life={vegetaLifeState} reduceLifeHandler={reduceLife}/>
+                    <Goku life={gokuLifeState} reduceLifeHandler={reduceLife} />
                 </div>
             </div>
             {showModal}

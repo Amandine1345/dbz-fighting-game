@@ -1,34 +1,30 @@
-import {Component} from "react";
+import {useEffect, useState} from "react";
 
 const withHitCounter = (WrappedComponent, power) => {
+    return ({...props}) => {
+        const {reduceLifeHandler} = props;
 
-    class WithHitCounter extends Component {
-        state = {
-            hits: 0,
+        const [hits, setHits] = useState(0);
+
+        const addOneHit = () => {
+            setHits(prevState => prevState + 1);
         }
 
-        addOneHit = () => {
-            this.setState(prevState => ({
-                hits: prevState.hits + 1,
-            }));
-        }
-
-        componentDidUpdate(prevProps, prevState, snapshot) {
-            if (this.state !== prevState) {
-                const ComponentName = WrappedComponent.name;
-
-                if (this.state.hits > prevState.hits) {
-                    this.props.reduceHandler(ComponentName, power);
-                }
+        useEffect(() => {
+            const componentName = WrappedComponent.name;
+            if (hits > 0) {
+                reduceLifeHandler(componentName, power);
             }
-        }
+        }, [hits]);
 
-        render() {
-            return <WrappedComponent hocState={this.state} hocAddOneHit={this.addOneHit} {...this.props} />
-        }
+        return (
+            <WrappedComponent
+                hocHits={hits}
+                hocAddOneHit={addOneHit}
+                {...props}
+            />
+        )
     }
-
-    return WithHitCounter;
 }
 
 export default withHitCounter;
