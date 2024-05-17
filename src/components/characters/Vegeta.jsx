@@ -1,18 +1,16 @@
 import withHitCounter from "./hoc/withHitCounter.jsx";
-import vegetaPicture from '../../assets/media/vegeta.png';
 import TableScore from "./subs/TableScore.jsx";
+import Button from "./subs/Button.jsx";
+import vegetaPicture from '../../assets/media/vegeta.png';
 
 const Vegeta = (props) => {
-    const {hocHits, hocAddOneHit, life, } = props;
-
-    const buttonTextDisplay = life > 0 ? 'Hit' : 'Dead';
-    const buttonStyleDisplay = life > 0 ? 'btn-success' : 'btn-danger disabled';
+    const {hocHits, hocAddOneHit, life} = props;
 
     return (
         <div className="col">
             <img src={vegetaPicture} alt="Vegeta" height="450px"/>
             <br/>
-            <button onClick={hocAddOneHit} className={`btn ${buttonStyleDisplay}`}>{buttonTextDisplay}</button>
+            <Button addOneHit={hocAddOneHit} life={life} />
             <TableScore hits={hocHits} life={life} />
         </div>
     )
