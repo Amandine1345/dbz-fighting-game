@@ -1,5 +1,5 @@
 import { Component } from "react";
-import DefaultCharacter from "./DefaultCharacter.jsx";
+import withHitCounter from "./hoc/withHitCounter.jsx";
 import gokuPicture from '../../assets/media/goku.png';
 
 class Goku extends Component {
@@ -36,4 +36,4 @@ class Goku extends Component {
     }
 }
 
-export default DefaultCharacter(Goku, 20);
+export default withHitCounter(Goku, 20);

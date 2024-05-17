@@ -1,8 +1,8 @@
 import {Component} from "react";
 
-const defaultCharacter = (WrappedComponent, power) => {
+const withHitCounter = (WrappedComponent, power) => {
 
-    class DefaultCharacter extends Component {
+    class WithHitCounter extends Component {
         state = {
             hits: 0,
         }
@@ -28,7 +28,7 @@ const defaultCharacter = (WrappedComponent, power) => {
         }
     }
 
-    return DefaultCharacter;
+    return WithHitCounter;
 }
 
-export default defaultCharacter;
+export default withHitCounter;

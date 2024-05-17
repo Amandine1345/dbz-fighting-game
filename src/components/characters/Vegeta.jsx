@@ -1,5 +1,5 @@
 import { Component } from "react";
-import DefaultCharacter from "./DefaultCharacter.jsx";
+import withHitCounter from "./hoc/withHitCounter.jsx";
 import vegetaPicture from '../../assets/media/vegeta.png';
 
 class Vegeta extends Component {
@@ -36,4 +36,4 @@ class Vegeta extends Component {
     }
 }
 
-export default DefaultCharacter(Vegeta, 10);
+export default withHitCounter(Vegeta, 10);
