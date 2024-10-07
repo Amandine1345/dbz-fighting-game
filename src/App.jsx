@@ -1,9 +1,9 @@
 // Libraries
-import {Fragment, useEffect, useState} from "react";
+import {useEffect, useState, useCallback, useRef} from "react";
 
 // Custom Components
-import Goku from "./components/characters/Goku.jsx";
-import Vegeta from "./components/characters/Vegeta.jsx";
+import GokuWithHitCounter from "./components/characters/Goku.jsx";
+import VegetaWithHitCounter from "./components/characters/Vegeta.jsx";
 import EndOfGameModal from "./components/modals/EndOfGameModal.jsx";
 
 // Custom CSS
@@ -16,8 +16,8 @@ function App() {
     const [vegetaLifeState, setVegetaLife] = useState(100);
 
     // References
-    // const gokuRef = useRef(null);
-    // const vegetaRef = useRef();
+    const gokuRef = useRef(null);
+    const vegetaRef = useRef(null);
 
     // Cycle
     useEffect(() => {
@@ -26,15 +26,15 @@ function App() {
         }
     }, [vegetaLifeState, gokuLifeState])
 
-    const reduceLife = (componentName, power) => {
+    const reduceLife = useCallback((componentName, power) => {
         componentName === 'Goku'
             ? setVegetaLife(prevState => prevState - power)
             : setGokuLife(prevState => prevState - power);
-    }
+    }, [setVegetaLife, setGokuLife]);
 
     const reStart = () => {
-        // gokuRef.current.setState({ hits: 0 });
-        // vegetaRef.current.setState({ hits: 0 });
+        gokuRef.current.setHits(0);
+        vegetaRef.current.setHits(0);
 
         setEndOfGame(false);
         setGokuLife(100);
@@ -44,17 +44,17 @@ function App() {
     const showModal = isEndOfGameState && <EndOfGameModal reStartHandler={reStart}/>;
 
     return (
-        <Fragment>
+        <>
             <div className="container text-center">
                 <h1>Goku vs. Vegeta</h1>
                 <hr/>
                 <div className="row">
-                    <Vegeta life={vegetaLifeState} reduceLifeHandler={reduceLife}/>
-                    <Goku life={gokuLifeState} reduceLifeHandler={reduceLife} />
+                    <VegetaWithHitCounter ref={vegetaRef} life={vegetaLifeState} reduceLifeHandler={reduceLife} />
+                    <GokuWithHitCounter ref={gokuRef} life={gokuLifeState} reduceLifeHandler={reduceLife} />
                 </div>
             </div>
             {showModal}
-        </Fragment>
+        </>
     )
 }
 
