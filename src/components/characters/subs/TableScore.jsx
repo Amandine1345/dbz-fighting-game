@@ -1,5 +1,6 @@
-const TableScore = (props) => {
-    const {hits, life} = props;
+import PropTypes from "prop-types";
+
+const TableScore = ({hits, life}) => {
     const lifeDisplay = life > 0 ? `${life} %` : 'Dead';
 
     return (
@@ -18,6 +19,11 @@ const TableScore = (props) => {
             </tbody>
         </table>
     )
+}
+
+TableScore.propTypes = {
+    hits: PropTypes.number.isRequired,
+    life: PropTypes.number.isRequired,
 }
 
 export default TableScore;

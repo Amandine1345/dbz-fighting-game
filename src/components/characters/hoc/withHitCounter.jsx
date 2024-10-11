@@ -1,4 +1,5 @@
 import {forwardRef, useEffect, useImperativeHandle, useState} from "react";
+import PropTypes from "prop-types";
 
 const withHitCounter = (WrappedComponent, power) => {
     return forwardRef((props, ref) => {
@@ -30,6 +31,11 @@ const withHitCounter = (WrappedComponent, power) => {
             />
         )
     });
+}
+
+withHitCounter.propTypes = {
+    WrappedComponent: PropTypes.object.isRequired,
+    power: PropTypes.number.isRequired,
 }
 
 export default withHitCounter;

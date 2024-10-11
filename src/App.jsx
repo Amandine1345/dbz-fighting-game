@@ -27,7 +27,7 @@ function App() {
     }, [vegetaLifeState, gokuLifeState])
 
     const reduceLife = useCallback((componentName, power) => {
-        componentName === 'Goku'
+        componentName === 'GokuForwardRef'
             ? setVegetaLife(prevState => prevState - power)
             : setGokuLife(prevState => prevState - power);
     }, [setVegetaLife, setGokuLife]);
